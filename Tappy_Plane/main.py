@@ -1,5 +1,6 @@
 import pygame
 import sys
+import asyncio
 import time
 from constants import *
 from sprites import BG, Ground, Plane, Spikes
@@ -90,9 +91,8 @@ class Game:
             score_rect = score_surf.get_rect(midtop = (WIDTH/2, y))
             self.screen.blit(score_surf, score_rect)
         
-            
-        
-    def run(self):
+    
+    async def run(self):
         last_time = time.time() 
         while True:
             
@@ -131,10 +131,12 @@ class Game:
                 self.screen.blit(self.menu_surf, self.menu_rect) 
 
             pygame.display.update()
+            await asyncio.sleep(0)
             self.clock.tick(FRAMERATE)
 if __name__ == '__main__':
     game = Game()
-    game.run()
+    #game.run()
+    asyncio.run(game.run())
 
 
 
